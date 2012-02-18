@@ -229,12 +229,3 @@ PRODUCT_COPY_FILES += \
 # commonly available
 # Inherit AOSP device configuration for vzwtab.
 $(call inherit-product-if-exists, vendor/samsung/vzwtab/vzwtab-vendor.mk)
-$(call inherit-product, vendor/aokp/products/common_tablet.mk)
-
-# Inherit common build.prop overrides
--include vendor/aokp/products/common_versions.mk
-
-# Copy maguro specific prebuilt files
-PRODUCT_COPY_FILES +=  \
-    vendor/aokp/prebuilt/common/media/bootanimation.zip:system/media/bootanimation.zip \
-    vendor/aokp/proprietary/common/lib/libmicrobes_jni.so:system/lib/libmicrobes_jni.so
