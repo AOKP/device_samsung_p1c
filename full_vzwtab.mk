@@ -30,7 +30,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full.mk)
 PRODUCT_LOCALES += hdpi
 
 # Discard inherited values and use our own instead.
-PRODUCT_NAME := aokp_vzwtab
+PRODUCT_NAME := full_vzwtab
 PRODUCT_DEVICE := vzwtab
 PRODUCT_BRAND := samsung
 PRODUCT_MANUFACTURER := samsung
