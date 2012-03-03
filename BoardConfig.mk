@@ -103,7 +103,7 @@ TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_CUSTOM_BOOTIMG_MK := device/samsung/galaxytab7c/shbootimg.mk
 TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /cache/.startrecovery; sync;"
-BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/vzwtab/recovery/graphics.c
+BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/galaxytab7c/recovery/graphics.c
 BOARD_USES_BML_OVER_MTD := true
 
 # MTP
