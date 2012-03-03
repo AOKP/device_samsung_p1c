@@ -38,36 +38,33 @@
 # These is the hardware-specific overlay, which points to the location
 # of hardware-specific resource overrides, typically the frameworks and
 # application settings that are stored in resourced.
-DEVICE_PACKAGE_OVERLAYS := device/samsung/vzwtab/overlay
+DEVICE_PACKAGE_OVERLAYS := device/samsung/galaxytab7c/overlay
 
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES := \
-	device/samsung/vzwtab/prebuilt/etc/asound.conf:system/etc/asound.conf \
-	device/samsung/vzwtab/prebuilt/lib/egl/egl.cfg:system/lib/egl/egl.cfg
+	device/samsung/galaxytab7c/prebuilt/etc/asound.conf:system/etc/asound.conf \
+	device/samsung/galaxytab7c/prebuilt/lib/egl/egl.cfg:system/lib/egl/egl.cfg \
+	device/samsung/galaxytab7c/prebuilt/etc/bluetooth/main.conf:system/etc/bluetooth/main.conf
 
 # Init files
 PRODUCT_COPY_FILES += \
-	device/samsung/vzwtab/init.smdkc110.rc:root/init.smdkc110.rc \
-	device/samsung/vzwtab/init.sch-i800.rc:root/init.sch-i800.rc \
-	device/samsung/vzwtab/init.sch-i800.usb.rc:root/init.sch-i800.usb.rc \
-	device/samsung/vzwtab/init.sch-i800.usb.rc:recovery/root/usb.rc \
-	device/samsung/vzwtab/ueventd.sch-i800.rc:root/ueventd.sch-i800.rc \
-	device/samsung/vzwtab/lpm.rc:root/lpm.rc
+	device/samsung/galaxytab7c/init.sch-i800.rc:root/init.sch-i800.rc \
+	device/samsung/galaxytab7c/init.sch-i800.usb.rc:root/init.sch-i800.usb.rc \
+	device/samsung/galaxytab7c/init.sch-i800.usb.rc:recovery/root/usb.rc \
+	device/samsung/galaxytab7c/ueventd.sch-i800.rc:root/ueventd.sch-i800.rc \
+	device/samsung/galaxytab7c/lpm.rc:root/lpm.rc
 
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
-	device/samsung/vzwtab/prebuilt/usr/keylayout/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
-	device/samsung/vzwtab/prebuilt/usr/keylayout/p1_keyboard.kl:system/usr/keylayout/p1_keyboard.kl \
-	device/samsung/vzwtab/prebuilt/usr/keylayout/AT42QT602240_Touchscreen.kl:system/usr/keylayout/AT42QT602240_Touchscreen.kl
+	device/samsung/galaxytab7c/prebuilt/usr/keylayout/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
+	device/samsung/galaxytab7c/prebuilt/usr/keylayout/p1_keyboard.kl:system/usr/keylayout/p1_keyboard.kl \
+	device/samsung/galaxytab7c/prebuilt/usr/keylayout/AT42QT602240_Touchscreen.kl:system/usr/keylayout/AT42QT602240_Touchscreen.kl
 
 # Filesystem management tools
 PRODUCT_PACKAGES := \
 	make_ext4fs \
-	setup_fs
-
-# utils
-PRODUCT_PACKAGES += \
-	bmlwrite
+	setup_fs \
+	bml_over_mtd
 
 # Lights
 PRODUCT_PACKAGES += \
@@ -86,8 +83,8 @@ PRODUCT_PACKAGES += \
 
 # These are the OpenMAX IL configuration files
 PRODUCT_COPY_FILES += \
-	device/samsung/vzwtab/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry \
-	device/samsung/vzwtab/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml
+	device/samsung/galaxytab7c/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry \
+	device/samsung/galaxytab7c/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml
 
 # These are the OpenMAX IL modules
 PRODUCT_PACKAGES += \
@@ -108,7 +105,7 @@ PRODUCT_COPY_FILES += \
 
 # Touchscreen
 PRODUCT_COPY_FILES += \
-        device/samsung/vzwtab/prebuilt/usr/idc/AT42QT602240_Touchscreen.idc:system/usr/idc/AT42QT602240_Touchscreen.idc
+        device/samsung/galaxytab7c/prebuilt/usr/idc/AT42QT602240_Touchscreen.idc:system/usr/idc/AT42QT602240_Touchscreen.idc
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
@@ -127,7 +124,7 @@ PRODUCT_COPY_FILES += \
 
 # vold
 PRODUCT_COPY_FILES += \
-        device/samsung/vzwtab/prebuilt/etc/vold.fstab:system/etc/vold.fstab
+        device/samsung/galaxytab7c/prebuilt/etc/vold.fstab:system/etc/vold.fstab
 
 # The OpenGL ES API level that is natively supported by this device.
 # This is a 16.16 fixed point number
@@ -139,15 +136,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
        ro.telephony.default_network=4 \
        ro.ril.def.agps.mode=2 \
        ro.ril.samsung_cdma=true \
-       ro.cdma.home.operator.numeric=310012 \
+       ro.cdma.home.operator.numeric=310004 \
        ro.cdma.home.operator.alpha=VzW \
        ro.cdma.homesystem=64,65,76,77,78,79,80,81,82,83 \
        ro.cdma.data_retry_config=default_randomization=2000,0,0,120000,180000,540000,960000 \
-       ro.config.vc_call_vol_steps=15 \
        ro.cdma.otaspnumschema=SELC,3,00,07,80,87,88,99 \
-       ro.telephony.call_ring.multiple=false \
-       ro.telephony.call_ring.delay=3000 \
-       ro.telephony.call_ring.absent=true \
        net.cdma.pppd.authtype=require-chap \
        net.cdma.pppd.user=user[SPACE]VerizonWireless \
        net.cdma.datalinkinterface=/dev/ttyCDMA0 \
@@ -163,11 +156,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # be reachable from resources or other mechanisms.
 PRODUCT_PROPERTY_OVERRIDES += \
        wifi.interface=eth0 \
-       wifi.supplicant_scan_interval=45 \
-       dalvik.vm.heapstartsize=5m \
-       dalvik.vm.heapgrowthlimit=48m \
-       dalvik.vm.heapsize=128m \
-       dalvik.vm.lockprof.threshold=500
+       wifi.supplicant_scan_interval=45
 
 # enable Google-specific location features,
 # like NetworkLocationProvider and LocationCollector
@@ -183,8 +172,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.kernel.android.checkjni=0 \
     dalvik.vm.checkjni=false
 
+# Override /proc/sys/vm/dirty_ratio on UMS
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vold.umsdirtyratio=20
+
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
+
+# dalvik
+include frameworks/base/build/phone-hdpi-512-dalvik-heap.mk
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -194,24 +190,13 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dexopt-data-only=1
 
-# kernel modules for ramdisk
-PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,device/samsung/vzwtab/modules/ramdisk,root/lib/modules)
-
-PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,device/samsung/vzwtab/modules/ramdisk,recovery/root/lib/modules)
-
 # other kernel modules not in ramdisk
 PRODUCT_COPY_FILES += $(foreach module,\
-    $(filter-out $(RAMDISK_MODULES),$(wildcard device/samsung/vzwtab/modules/*.ko)),\
+    $(filter-out $(RAMDISK_MODULES),$(wildcard device/samsung/galaxytab7c/modules/*.ko)),\
     $(module):system/lib/modules/$(notdir $(module)))
 
-# rfs converter
-PRODUCT_COPY_FILES += \
-    device/samsung/vzwtab/prebuilt/sbin/fat.format:root/sbin/fat.format
-
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-    LOCAL_KERNEL := device/samsung/vzwtab/kernel
+    LOCAL_KERNEL := device/samsung/galaxytab7c/kernel
 else
     LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
@@ -221,11 +206,10 @@ PRODUCT_COPY_FILES += \
 
 # copy the filesystem converter
 PRODUCT_COPY_FILES += \
-	device/samsung/vzwtab/updater.sh:updater.sh
+	device/samsung/galaxytab7c/updater.sh:updater.sh
 
 # See comment at the top of this file. This is where the other
 # half of the device-specific product definition file takes care
 # of the aspects that require proprietary drivers that aren't
 # commonly available
-# Inherit AOSP device configuration for vzwtab.
-$(call inherit-product-if-exists, vendor/samsung/vzwtab/vzwtab-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung/galaxytab7c/galaxytab7c-vendor.mk)

@@ -8,23 +8,11 @@ loglevel 9
     mkdir /mnt/sdcard 0000 system system
     symlink /mnt/sdcard /sdcard
 
-    # samsung kernel modules 
-    insmod /lib/modules/fsr.ko
-    insmod /lib/modules/fsr_stl.ko
-    insmod /lib/modules/rfs_glue.ko
-    insmod /lib/modules/rfs_fat.ko
-
-# parameter block
-    mkdir /mnt/.lfs 0755 root root
-    insmod /lib/modules/j4fs.ko
-    mount j4fs /dev/block/stl6 /mnt/.lfs
-    insmod /lib/modules/param.ko
-
 on boot
     mount debugfs /sys/kernel/debug /sys/kernel/debug
 
-    setprop ro.build.product vzwtab
-    setprop ro.product.device vzwtab
+    setprop ro.build.product galaxytab7c
+    setprop ro.product.device galaxytab7c
     setprop ro.radio.noril yes
 
 # fake some battery state
@@ -38,10 +26,8 @@ on boot
     chmod 660 /dev/i2c-1
 
 on fs
-# mount partitions
-    # Mount /system rw first to give the filesystem a chance to save a checkpoint
-    mount ext4 /dev/block/stl9 /system
-    
+    mount ext4 /dev/block/mmcblk0p2 /data wait nosuid noatime nodiratime noauto_da_alloc
+
 # modem
     insmod /system/lib/modules/dpram_vzw.ko
 
@@ -53,16 +39,6 @@ on fs
 
 # ko files for bthid
     insmod /system/lib/modules/bthid.ko
-
-    mkdir /data
-    mount ext4 /dev/block/mmcblk0p2 /data wait nosuid noatime nodiratime noauto_da_alloc
-    chown system system /data
-    chmod 0771 /data    
-
-    mkdir /cache
-    mount ext4 /dev/block/mmcblk0p1 /cache nosuid nodev noatime nodiratime noauto_da_alloc
-    chown system cache /cache
-    chmod 0771 /cache
 
 #bluetooth
     chown bluetooth bluetooth /dev/s3c2410_serial0
@@ -134,7 +110,7 @@ service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
     disabled
     oneshot
 
-service hciattach /system/bin/brcm_patchram_plus -d --enable_hci --baudrate 3000000 --patchram /system/bin/BCM4329B1_002.002.023.0534.0571.hcd /dev/s3c2410_serial0
+service hciattach /system/bin/brcm_patchram_plus --enable_hci --baudrate 3000000 --patchram /system/bin/BCM4329B1_002.002.023.0534.0571.hcd /dev/s3c2410_serial0
     class main
     user bluetooth
     group bluetooth net_bt_admin
@@ -152,4 +128,3 @@ on property:ril.cdma.data_state=1
 
 on property:ril.cdma.data_state=0
     stop pppd_cdma
-
