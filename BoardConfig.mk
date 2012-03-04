@@ -60,12 +60,11 @@ BOARD_WPA_SUPPLICANT_DRIVER := WEXT
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wext
 BOARD_WLAN_DEVICE := bcm4329
-WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/dhd.ko"
-WIFI_DRIVER_MODULE_ARG := "firmware_path=/system/etc/wifi/bcm4329_sta.bin nvram_path=/system/etc/wifi/nvram_net.txt dhd_watchdog_ms=10 dhd_poll=1"
-WIFI_DRIVER_FW_PATH_AP := "/system/etc/wifi/bcm4329_aps.bin"
-WIFI_DRIVER_FW_PATH_STA := "/system/etc/wifi/bcm4329_sta.bin"
-WIFI_DRIVER_MODULE_NAME := "dhd"
-BOARD_WEXT_NO_COMBO_SCAN := true
+WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/bcm4329.ko"
+WIFI_DRIVER_FW_PATH_STA := "/vendor/firmware/fw_bcm4329.bin"
+WIFI_DRIVER_FW_PATH_AP := "/vendor/firmware/fw_bcm4329_apsta.bin"
+WIFI_DRIVER_MODULE_NAME := "bcm4329"
+WIFI_DRIVER_MODULE_ARG := "firmware_path=/vendor/firmware/fw_bcm4329.bin nvram_path=/vendor/firmware/nvram_net.txt"
 
 USE_CAMERA_STUB := false
 ifeq ($(USE_CAMERA_STUB),false)
@@ -103,7 +102,7 @@ TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_CUSTOM_BOOTIMG_MK := device/samsung/galaxytab7c/shbootimg.mk
 TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /cache/.startrecovery; sync;"
-BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/galaxytab7c/recovery/graphics.c
+BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/aries-common/recovery/graphics.c
 BOARD_USES_BML_OVER_MTD := true
 
 # MTP
@@ -111,3 +110,4 @@ BOARD_MTP_DEVICE := "/dev/usb_mtp_gadget"
 
 # Asserts
 TARGET_OTA_ASSERT_DEVICE := galaxytab7c,SCH-I800,SPH-P100
+
