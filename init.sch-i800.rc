@@ -11,9 +11,11 @@ loglevel 9
 on boot
     mount debugfs /sys/kernel/debug /sys/kernel/debug
 
-    setprop ro.build.product galaxytab7c
-    setprop ro.product.device galaxytab7c
+    setprop ro.build.product p1c
+    setprop ro.product.device p1c
     setprop ro.radio.noril yes
+
+    setprop ro.crypto.keyfile.userdata /data/metadata
 
 # fake some battery state
     setprop status.battery.state Slow
@@ -27,9 +29,6 @@ on boot
 
 on fs
     mount ext4 /dev/block/mmcblk0p2 /data wait nosuid noatime nodiratime noauto_da_alloc
-
-# modem
-    insmod /system/lib/modules/dpram_vzw.ko
 
 # ko files for vibrator
     insmod /system/lib/modules/vibrator.ko
@@ -78,10 +77,7 @@ on post-fs-data
     mkdir /data/misc/dhcp 0770 dhcp dhcp
 
 # to enable wifi
-     setprop wifi.interface "eth0"
-
-on property:ro.debuggable=1
-    start adbd
+    setprop wifi.interface "eth0"
 
     setprop vold.post_fs_data_done 1
 
@@ -121,6 +117,16 @@ service gps-daemon /system/vendor/bin/gpsd
     class late_start
     user system
     group system inet
+
+service tvout /system/bin/tvoutserver
+    class late_start
+    user system
+    group graphics
+
+service tvouthack /system/bin/tvouthack
+    user system
+    group graphics
+    disabled
 
 on property:ril.cdma.data_state=1
     start pppd_cdma
