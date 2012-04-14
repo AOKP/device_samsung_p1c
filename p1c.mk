@@ -54,11 +54,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
         device/samsung/p1c/prebuilt/etc/vold.fstab:system/etc/vold.fstab
 
-# ghetto temp fix for wifi
-PRODUCT_COPY_FILES += \
-        device/samsung/p1c/prebuilt/lib/modules/bcm4329.ko:system/lib/modules/bcm4329.ko
-        device/samsung/p1c/prebuilt/vendor/firmware/fw_bcm4329.bin:system/vendor/firmware/fw_bcm4329.bin
-
 # Verizon cdma stuff
 PRODUCT_PROPERTY_OVERRIDES := \
        ro.telephony.default_network=4 \
