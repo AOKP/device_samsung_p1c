@@ -42,8 +42,8 @@ DEVICE_PACKAGE_OVERLAYS := device/samsung/p1c/overlay
 
 # Init files
 PRODUCT_COPY_FILES := \
-	device/samsung/p1c/init.sch-i800.rc:root/init.sch-i800.rc \
-	device/samsung/p1c/ueventd.sch-i800.rc:root/ueventd.sch-i800.rc
+	device/samsung/p1c/init.p1c.rc:root/init.p1c.rc \
+	device/samsung/p1c/ueventd.p1c.rc:root/ueventd.p1c.rc
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
@@ -69,21 +69,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
        net.cdma.ppp.interface=ppp0 \
        net.connectivity.type=CDMA1 \
        net.interfaces.defaultroute=cdma \
-       mobiledata.interfaces=eth0,ppp0
-
-# other kernel modules not in ramdisk
-PRODUCT_COPY_FILES += $(foreach module,\
-    $(filter-out $(RAMDISK_MODULES),$(wildcard device/samsung/p1c/modules/*.ko)),\
-    $(module):system/lib/modules/$(notdir $(module)))
-
-ifeq ($(TARGET_PREBUILT_KERNEL),)
-    LOCAL_KERNEL := device/samsung/p1c/kernel
-else
-    LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-endif
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):kernel
+       mobiledata.interfaces=wlan0,ppp0
 
 # Inherit p1-common common device configuration.
 $(call inherit-product, device/samsung/p1-common/device_base.mk)
