@@ -28,7 +28,6 @@ TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/samsung/p1c/releasetools/p
 # kernel
 TARGET_KERNEL_SOURCE := kernel/samsung/p1c
 TARGET_KERNEL_CONFIG := cyanogenmod_p1c_defconfig
-TARGET_PREBUILT_KERNEL := device/samsung/p1c/kernel
 
 # Asserts
 TARGET_OTA_ASSERT_DEVICE := galaxytab7c,p1c,SCH-I800,SPH-P100,vzwtab

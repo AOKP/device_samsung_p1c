@@ -80,12 +80,6 @@ PRODUCT_COPY_FILES += $(foreach module,\
     $(filter-out $(RAMDISK_MODULES),$(wildcard device/samsung/p1c/modules/*.ko)),\
     $(module):system/lib/modules/$(notdir $(module)))
 
-ifeq ($(TARGET_PREBUILT_KERNEL),)
-    LOCAL_KERNEL := device/samsung/p1c/kernel
-else
-    LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-endif
-
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
 
